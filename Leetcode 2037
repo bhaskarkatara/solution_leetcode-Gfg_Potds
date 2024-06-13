@@ -1,0 +1,9 @@
+ int minMovesToSeat(vector<int>& s, vector<int>& st) {
+       sort(begin(s),end(s));
+       sort(begin(st),end(st));
+       int ans = 0;
+       for(int i=0 ;i<s.size();++i){
+           ans += abs(s[i]-st[i]);
+       }
+       return ans;
+    }
