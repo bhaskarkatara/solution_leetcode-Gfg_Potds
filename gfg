@@ -1,0 +1,10 @@
+ string armstrongNumber(int n){
+      int val = 0;
+      int N = n;
+      while(n){
+          int r = n%10;
+          val = val + (r*r*r);
+          n /= 10;
+          
+      }
+      return (val == N)? "Yes" : "No";
