@@ -1,0 +1,56 @@
+// my solution 
+// TC O(N)
+// SC O(N)
+// similiar to leetcode 930
+
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+         unordered_map<int, int> sumCount;
+         int count = 0;
+          int sum = 0;
+
+
+    for (int i = 0; i < nums.size(); ++i) {
+        nums[i] = (nums[i]%2 == 0)? 0 : 1;
+        sum += nums[i];
+        if(sum == k)count++;
+        if (sumCount.find(sum - k) != sumCount.end()) {
+            count += sumCount[sum - k];
+        }
+        sumCount[sum]++;
+
+    }
+
+    return count;
+    }
+};
+
+...................................................
+
+// TC O(N)
+//SC O(1)
+
+class Solution {
+public:
+    int f(vector<int> &nums, int k){
+        int n = nums.size(), ans = 0;
+        
+        for(int i=0,j=0,odd=0; i<n; ++i){
+            odd += nums[i]&1;
+
+            while(odd > k){
+                odd -= nums[j]&1;
+                j++;
+            }
+
+            ans += i - j + 1;
+        }
+
+        return ans;
+    }
+
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        return f(nums, k) - f(nums, k-1);      
+    }
+};
