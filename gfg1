@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    long long sumMatrix(long long n, long long q) {
+        // code here
+        if(2*n < q)return 0; // suppose n = 4 and q= 9 ,and if we take max to max 4 + 4 as a pair which is greater than q , it is not possible
+        if(n < q){
+            long long a = q-n;
+            long long b = q-a;
+            return abs(a-b)+1;
+        }
+        else{
+              long long a = abs(q-n);
+              long long b = q-a;
+              return abs(a+b)-1;
+        }
+    }
+};
