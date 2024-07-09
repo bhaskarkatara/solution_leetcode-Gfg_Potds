@@ -1,0 +1,23 @@
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+
+        int n = customers.size();
+        long long ft = customers[0][0] + customers[0][1];
+        long long waiting = ft - customers[0][0];
+
+        for(int i = 1; i<n; i++){
+            if(ft >= customers[i][0] ){
+                ft += customers[i][1];
+                waiting  +=( ft - customers[i][0]);
+            
+            }else{
+// what if when customers comes after prev customer
+                ft = customers[i][0] + customers[i][1];
+
+                waiting  += (ft - customers[i][0]);
+            }
+        }
+        return double(double(waiting)/double(n));
+    }
+};
