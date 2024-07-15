@@ -1,0 +1,35 @@
+class Solution {
+public:
+TreeNode*bfs(int root,  unordered_map<int,vector<pair<int,int>>>&mp){
+    TreeNode*head = new TreeNode(root);
+    for(auto it :mp[root]){
+        if(it.second == 1)
+        head->left  = bfs(it.first,mp);
+        else head->right = bfs(it.first,mp);
+    }
+    return head;
+}
+    TreeNode* createBinaryTree(vector<vector<int>>& des) {
+        unordered_map<int,vector<pair<int,int>>>mp;
+        set<int>st;
+        for(int i = 0;i<des.size(); ++i){
+           int r = des[i][0];
+           int c = des[i][1];
+           int s = des[i][2];
+           st.insert(c);
+           mp[r].push_back({c,s});
+        }
+
+   int root = 0;
+        for(auto it : des){
+         if(!st.count(it[0])){
+            root = it[0];
+            break;
+         }
+        }
+
+      return bfs(root,mp);  
+
+
+    }
+};
